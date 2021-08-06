@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import { Switch, Route } from "react-router-dom";
+
+// Components
+import { Navbar } from "./components/Navbar/Navbar";
+
+// URL Routes for pages
+import { Routes } from "./utils/Routes";
+
+// layout
+import { Layout } from "./hocs/Layout";
+
+// Pages
+import { Activation } from "./pages/Activation/Activation";
+import { Homepage } from "./pages/Homepage/Homepage";
+import { Login } from "./pages/Loginpage/Loginpage";
+import { Resetpassword } from "./pages/Resetpassword/Resetpassword";
+import { ResetPasswordConfrim } from "./pages/Resetpasswordconfrim/ResetPasswordConfrim";
+import { Signup } from "./pages/Signup/Signup";
+
+export const App = () => {
+  const LayoutRoute = ({ component: Component, ...rest }) => {
+    return (
+      <Route
+        {...rest}
+        render={(props) => (
+          <Layout>
+            <Component {...props} />
+          </Layout>
+        )}
+      />
+    );
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Switch>
+        {/* <LayoutRoute component={Navbar} path={Routes.Home.path} exact /> */}
+        <LayoutRoute component={Homepage} path={Routes.Dashboard.path} exact />
+        <LayoutRoute component={Login} path={Routes.Loginpage.path} exact />
+        <LayoutRoute component={Signup} path={Routes.signup.path} exact />
+        <LayoutRoute
+          component={Activation}
+          path={Routes.activation.path}
+          exact
+        />
+        <LayoutRoute
+          component={Resetpassword}
+          path={Routes.resetpassword.path}
+          exact
+        />
+        <LayoutRoute
+          component={ResetPasswordConfrim}
+          path={Routes.resetpasswordconfrim.path}
+          exact
+        />
+      </Switch>
+    </>
   );
-}
-
-export default App;
+};

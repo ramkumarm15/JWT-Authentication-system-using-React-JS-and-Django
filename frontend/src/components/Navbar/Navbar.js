@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { logout } from "../../store/actions/auth";
 
@@ -12,7 +12,26 @@ export const HeaderApp = ({ logout, isAuthenticated }) => {
 
   const logout_user = () => {
     logout();
-    console.log('logout')
+  };
+
+  const AuthLinks = () => {
+    return (
+      <>
+        <Nav.Link onClick={logout_user}>Logout</Nav.Link>
+      </>
+    );
+  };
+  const GuestLinks = () => {
+    return (
+      <>
+        <Nav.Link as={Link} to="/login">
+          Login
+        </Nav.Link>
+        <Nav.Link as={Link} to="/signup">
+          Signup
+        </Nav.Link>
+      </>
+    );
   };
 
   return (
@@ -24,20 +43,14 @@ export const HeaderApp = ({ logout, isAuthenticated }) => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className="ms-auto">
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
               <Nav.Link as={Link} to="/">
-                Link
+                FAQ
               </Nav.Link>
-              {isAuthenticated ? (
-                <Nav.Link onClick={logout_user}>Logout</Nav.Link>
-              ) : (
-                <Nav.Link as={Link} to="/login">
-                  Login
-                </Nav.Link>
-              )}
+              {isAuthenticated ? <AuthLinks /> : <GuestLinks />}
             </Nav>
           </Navbar.Collapse>
         </Container>

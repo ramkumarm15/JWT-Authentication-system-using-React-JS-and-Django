@@ -60,7 +60,6 @@ export const login = (email, password) => async (dispatch) => {
   try {
     const result = await API.post("/auth/jwt/create/", body, config);
     const statusCode = result.status;
-    console.log(result);
 
     if (statusCode === 200) {
       const { status, statusText } = result;

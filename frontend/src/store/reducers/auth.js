@@ -1,6 +1,8 @@
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
+  ACTIVATION_SUCCESS,
+  ACTIVATION_FAILED,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOAD_USER_SUCCESS,
@@ -74,6 +76,8 @@ export const auth = (state = initialState, action) => {
     case PASSWORD_RESET_FAILED:
     case PASSWORD_RESET_CONFIRM_SUCCESS:
     case PASSWORD_RESET_CONFIRM_FAILED:
+    case ACTIVATION_SUCCESS:
+    case ACTIVATION_FAILED:
       return {
         ...state,
       };

@@ -1,6 +1,8 @@
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
+  ACTIVATION_SUCCESS,
+  ACTIVATION_FAILED,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOAD_USER_SUCCESS,
@@ -68,7 +70,7 @@ export const signup =
 
     try {
       const result = await API.post("/auth/users/", body, config);
-      
+
       const statusCode = result.status;
 
       if (statusCode === 201) {
@@ -97,6 +99,38 @@ export const signup =
       return res;
     }
   };
+
+
+// Activate a user account
+export const activate = (uid, token) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({ uid, token });
+
+  try {
+    const response = await API.post("/auth/users/activation/", body, config);
+
+    if (response.status === 204) {
+      dispatch({
+        type: ACTIVATION_SUCCESS,
+      });
+      return response.status;
+    } else {
+      dispatch({
+        type: ACTIVATION_FAILED,
+      });
+      return false;
+    }
+  } catch (err) {
+    dispatch({
+      type: ACTIVATION_FAILED,
+    });
+    return false;
+  }
+};
 
 // Login the existing user account
 export const login = (email, password) => async (dispatch) => {

@@ -10,7 +10,7 @@ import { Routes } from "./utils/Routes";
 
 // layout
 import { Layout } from "./hocs/Layout";
-
+import { Header } from "./components/Navbar/Navbar";
 // Pages
 import { Activation } from "./pages/Activation/Activation";
 import { Homepage } from "./pages/Homepage/Homepage";
@@ -18,9 +18,24 @@ import { Login } from "./pages/Loginpage/Loginpage";
 import { Resetpassword } from "./pages/Resetpassword/Resetpassword";
 import { ResetPasswordConfrim } from "./pages/Resetpasswordconfrim/ResetPasswordConfrim";
 import { Signup } from "./pages/Signup/Signup";
+import { Component } from "react";
 
 export const App = () => {
   const LayoutRoute = ({ component: Component, ...rest }) => {
+    return (
+      <Route
+        {...rest}
+        render={(props) => (
+          <Layout>
+            <Header />
+            <Component {...props} />
+          </Layout>
+        )}
+      />
+    );
+  };
+
+  const LayoutWithoutNav = ({component: Component, ...rest})=>{
     return (
       <Route
         {...rest}
@@ -31,7 +46,7 @@ export const App = () => {
         )}
       />
     );
-  };
+  }
 
   return (
     <>
@@ -40,7 +55,7 @@ export const App = () => {
         <LayoutRoute component={Homepage} path={Routes.Dashboard.path} exact />
         <LayoutRoute component={Login} path={Routes.Loginpage.path} exact />
         <LayoutRoute component={Signup} path={Routes.signup.path} exact />
-        <LayoutRoute
+        <LayoutWithoutNav
           component={Activation}
           path={Routes.activation.path}
           exact

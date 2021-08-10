@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Header } from "../components/Navbar/Navbar";
+
 
 import { connect } from "react-redux";
 import { checkAuthentication, loadUser } from "../store/actions/auth";
@@ -15,7 +15,7 @@ const LayoutApp = ({ checkAuthentication, loadUser, children }) => {
 
   return (
     <>
-      <Header />
+      
       <ToastContainer transition={Slide} />
       {children}
     </>

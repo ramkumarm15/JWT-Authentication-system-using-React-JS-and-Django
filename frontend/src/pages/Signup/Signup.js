@@ -38,30 +38,33 @@ const SignupApp = ({ signup, isAuthenticated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setRequestSent(true);
-    // send state to redux
-    const log = await signup(email, name, password, re_password);
+    if (password === re_password) {
+      setRequestSent(true);
+      // send state to redux
+      const log = await signup(email, name, password, re_password);
 
+      if (log.status === 201) {
+        const message =
+          "Activation link sent to email. You can login to your after activation";
 
-    if (log.status === 201) {
-      const message =
-        "Activation link sent to email. You can login to your after activation";
+        setEmailError("");
+        setPasswordError("");
+        setRequestSent(false);
+        toast.success(message, {
+          hideProgressBar: true,
+          autoClose: 5000,
+        });
+      } else {
+        setRequestSent(false);
+        const response_data = log.data;
 
-      setEmailError("");
-      setPasswordError("");
-      setRequestSent(false);
-      toast.success(message, {
-        hideProgressBar: true,
-        autoClose: 5000,
-      });
-    } else {
-      setRequestSent(false);
-      const response_data = log.data;
-
-      for (let data in response_data) {
-        setEmailError(data === "email" ? response_data[data][0] : null);
-        setPasswordError(data === "password" ? response_data[data] : null);
+        for (let data in response_data) {
+          setEmailError(data === "email" ? response_data[data][0] : null);
+          setPasswordError(data === "password" ? response_data[data] : null);
+        }
       }
+    } else {
+      toast.error("Password doesn't match, Try another password");
     }
   };
 

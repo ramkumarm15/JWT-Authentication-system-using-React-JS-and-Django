@@ -1,4 +1,6 @@
 import {
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILED,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOAD_USER_SUCCESS,
@@ -6,6 +8,10 @@ import {
   AUTHENTICATED_SUCCESS,
   AUTHENTICATED_FAILED,
   LOGOUT,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAILED,
+  PASSWORD_RESET_CONFIRM_SUCCESS,
+  PASSWORD_RESET_CONFIRM_FAILED,
 } from "../actions/types";
 
 const initialState = {
@@ -32,6 +38,11 @@ export const auth = (state = initialState, action) => {
         user: payload,
       };
 
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: false,
+      };
     case AUTHENTICATED_SUCCESS:
       return {
         ...state,
@@ -42,7 +53,7 @@ export const auth = (state = initialState, action) => {
         ...state,
         isAuthenticated: false,
       };
-
+    case SIGNUP_FAILED:
     case LOGIN_FAILED:
     case LOGOUT:
       localStorage.removeItem("access");
@@ -58,6 +69,13 @@ export const auth = (state = initialState, action) => {
       return {
         ...state,
         user: null,
+      };
+    case PASSWORD_RESET_SUCCESS:
+    case PASSWORD_RESET_FAILED:
+    case PASSWORD_RESET_CONFIRM_SUCCESS:
+    case PASSWORD_RESET_CONFIRM_FAILED:
+      return {
+        ...state,
       };
     default:
       return state;

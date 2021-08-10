@@ -4,6 +4,6 @@ export const Routes = {
   Loginpage: { path: "/login" },
   signup: { path: "/signup" },
   resetpassword: { path: "/reset-password" },
-  resetpasswordconfrim: { path: "/password/reset/confrim/:uid/:token" },
+  resetpasswordconfrim: { path: "/password/reset/:uid/:token" },
   activation: { path: "/activate/:uid/:token" },
 };

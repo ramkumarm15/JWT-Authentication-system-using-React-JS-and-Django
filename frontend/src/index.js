@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { App } from "./App";
 
 // React Router
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 // Redux Store
 import { Provider } from "react-redux";
@@ -18,9 +18,9 @@ const Root = document.getElementById("root");
 
 const AppSource = (
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </Provider>
 );
 

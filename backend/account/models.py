@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager,AbstractBaseUser
+from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager, AbstractBaseUser
 from django.db import models
 
 
@@ -14,13 +14,26 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
+    def create_superuser(self, email, name, password=None):
+        if not email:
+            raise ValueError('Must have email address')
+
+        email = self.normalize_email(email)
+        user = self.create_user(email, name=name, password=password)
+        user.is_staff = True
+        user.is_superuser = True
+
+        user.save()
+
+        return user
+
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
+    is_superuser = models.BooleanField(default=False)
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'email'

@@ -1,4 +1,6 @@
 import {
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILED,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOAD_USER_SUCCESS,
@@ -6,10 +8,15 @@ import {
   AUTHENTICATED_SUCCESS,
   AUTHENTICATED_FAILED,
   LOGOUT,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAILED,
+  PASSWORD_RESET_CONFIRM_SUCCESS,
+  PASSWORD_RESET_CONFIRM_FAILED,
 } from "../actions/types";
 
 import { API } from "../../axiosInstance";
 
+// Check Authentictaion of Users, When user again loggedIn after some times.
 export const checkAuthentication = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
     const config = {
@@ -49,6 +56,49 @@ export const checkAuthentication = () => async (dispatch) => {
   }
 };
 
+// Register a New Account for user
+export const signup =
+  (email, name, password, re_password) => async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ email, name, password, re_password });
+
+    try {
+      const result = await API.post("/auth/users/", body, config);
+      
+      const statusCode = result.status;
+
+      if (statusCode === 201) {
+        const { status, statusText } = result;
+        const res = { status, statusText };
+        dispatch({
+          type: SIGNUP_SUCCESS,
+        });
+        return res;
+      } else {
+        const { status, statusText, data } = result.response;
+        const res = { status, statusText, data };
+
+        dispatch({
+          type: SIGNUP_FAILED,
+        });
+        return res;
+      }
+    } catch (err) {
+      const { status, statusText, data } = err.response;
+
+      const res = { status, statusText, data };
+      dispatch({
+        type: SIGNUP_FAILED,
+      });
+      return res;
+    }
+  };
+
+// Login the existing user account
 export const login = (email, password) => async (dispatch) => {
   const config = {
     headers: {
@@ -81,7 +131,6 @@ export const login = (email, password) => async (dispatch) => {
       return res;
     }
   } catch (err) {
-
     const { status, statusText, data } = err.response;
 
     const res = { status, statusText, data };
@@ -92,6 +141,7 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
+// Get User data after loggedIn
 export const loadUser = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
     try {
@@ -119,8 +169,62 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
+// Logout of user account
 export const logout = () => (dispatch) => {
   dispatch({
     type: LOGOUT,
   });
 };
+
+// Get reset password link of the user account
+export const reset_password = (email) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({ email });
+
+  try {
+    const result = await API.post("/auth/users/reset_password/", body, config);
+
+    dispatch({
+      type: PASSWORD_RESET_SUCCESS,
+    });
+    return true;
+  } catch (err) {
+    dispatch({
+      type: PASSWORD_RESET_FAILED,
+    });
+    return false;
+  }
+};
+
+// Reset the new password of user account
+export const reset_password_confirm =
+  (uid, token, new_password, re_new_password) => async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ uid, token, new_password, re_new_password });
+    try {
+      const result = await API.post(
+        "/auth/users/reset_password_confirm/",
+        body,
+        config
+      );
+
+      dispatch({
+        type: PASSWORD_RESET_CONFIRM_SUCCESS,
+      });
+      return true;
+    } catch (err) {
+      dispatch({
+        type: PASSWORD_RESET_CONFIRM_FAILED,
+      });
+      console.log(err.response);
+      return false;
+    }
+  };

@@ -21,6 +21,7 @@ const initialState = {
   refresh: localStorage.getItem("refresh"),
   isAuthenticated: null,
   user: null,
+  loading: true,
 };
 
 export const auth = (state = initialState, action) => {
@@ -33,27 +34,32 @@ export const auth = (state = initialState, action) => {
         isAuthenticated: true,
         access: payload.access,
         refresh: payload.refresh,
+        loading: false,
       };
     case LOAD_USER_SUCCESS:
       return {
         ...state,
         user: payload,
+        loading: false,
       };
 
     case SIGNUP_SUCCESS:
       return {
         ...state,
         isAuthenticated: false,
+        loading: false,
       };
     case AUTHENTICATED_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
+        loading: false,
       };
     case AUTHENTICATED_FAILED:
       return {
         ...state,
         isAuthenticated: false,
+        loading: false,
       };
     case SIGNUP_FAILED:
     case LOGIN_FAILED:
@@ -66,11 +72,13 @@ export const auth = (state = initialState, action) => {
         refresh: null,
         isAuthenticated: false,
         user: null,
+        loading: false,
       };
     case LOAD_USER_FAILED:
       return {
         ...state,
         user: null,
+        loading: false,
       };
     case PASSWORD_RESET_SUCCESS:
     case PASSWORD_RESET_FAILED:
@@ -80,6 +88,7 @@ export const auth = (state = initialState, action) => {
     case ACTIVATION_FAILED:
       return {
         ...state,
+        loading: false,
       };
     default:
       return state;

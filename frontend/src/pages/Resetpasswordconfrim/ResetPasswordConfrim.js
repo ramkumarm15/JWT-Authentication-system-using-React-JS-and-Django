@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // Bootstrap
@@ -50,6 +50,10 @@ const ResetPasswordConfrimApp = ({ match, reset_password_confirm }) => {
     }
   };
 
+  if (requestSent) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <>
       <div className="d-flex align-items-center min-vh-100 py-3">
@@ -94,15 +98,6 @@ const ResetPasswordConfrimApp = ({ match, reset_password_confirm }) => {
                       </Button>
                     </Form.Group>
                   </Form>
-                  {requestSent ? (
-                    <>
-                      <div className="text-center mt-3">
-                        <p className="text-muted">
-                          <Link to="/login">Login</Link>
-                        </p>
-                      </div>
-                    </>
-                  ) : null}
                 </Card.Body>
               </Card>
             </Col>

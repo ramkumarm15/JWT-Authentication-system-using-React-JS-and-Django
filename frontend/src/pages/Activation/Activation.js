@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // Bootstrap
@@ -13,15 +13,15 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-
-
 // Redux action
 import { activate } from "../../store/actions/auth";
 
 const ActivationApp = ({ match, activate }) => {
   const [requestSent, setRequestSent] = useState(false);
+  const [spinner, setSpinner] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSpinner(true);
     const uid = match.params.uid;
     const token = match.params.token;
 
@@ -49,9 +49,23 @@ const ActivationApp = ({ match, activate }) => {
                   </div>
                   <Form onSubmit={(e) => handleSubmit(e)}>
                     <Form.Group className="text-center">
-                      <Button type="submit" variant="primary" value="Login">
-                        Activate
-                      </Button>
+                      {!spinner ? (
+                        <Button type="submit" variant="primary" value="Login">
+                          Activate
+                        </Button>
+                      ) : (
+                        <Button variant="primary" disabled>
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          {"  "}
+                          Activating...
+                        </Button>
+                      )}
                     </Form.Group>
                   </Form>
                 </Card.Body>

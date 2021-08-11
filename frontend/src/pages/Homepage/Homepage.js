@@ -26,9 +26,6 @@ const HomepageApp = ({ isAuthenticated }) => {
                 <Link className="btn btn-secondary me-3" to="/login">
                   Login
                 </Link>
-                <Link className="btn btn-outline-secondary" to="/signup">
-                  Sign up
-                </Link>
               </div>
             </Col>
           </Row>

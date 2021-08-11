@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // Bootstrap
@@ -184,5 +184,6 @@ const mapStateToProps = (state) => ({
   // Check Authentictaion
   isAuthenticated: state.auth.isAuthenticated,
 });
-
 export const Signup = connect(mapStateToProps, { signup })(SignupApp);
+
+// export default Signup;

@@ -1,5 +1,5 @@
 export const Routes = {
-  // Home: { path: "/" },
+  Home: { path: "/dashboard" },
   Dashboard: { path: "/" },
   Loginpage: { path: "/login" },
   signup: { path: "/signup" },

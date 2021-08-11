@@ -12,3 +12,20 @@ body {
 
 
 @import url("./auth/_toastify.css");
+
+.loader{
+  display: flex;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.loader.show{
+  /* height: 0; */
+  /* opacity: 0; */
+  display: none;
+  /* visibility: hidden; */
+}

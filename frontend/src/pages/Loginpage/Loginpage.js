@@ -28,7 +28,6 @@ const LoginApp = ({ login, isAuthenticated }) => {
     const log = await login(email, password);
 
     if (log.status === 200) {
-
       const message = `Login Success`;
 
       toast.success(message, {
@@ -36,7 +35,6 @@ const LoginApp = ({ login, isAuthenticated }) => {
         autoClose: 4000,
       });
     } else {
-
       const message = `${log.status} ${log.statusText}, ${log.data.detail}`;
 
       toast.error(message, {
@@ -55,6 +53,7 @@ const LoginApp = ({ login, isAuthenticated }) => {
 
   return (
     <>
+      {/* <Cube time={2000} /> */}
       <div className="d-flex align-items-center min-vh-100 py-3">
         <Container>
           <Row className="justify-content-center">
@@ -126,4 +125,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export const Login = connect(mapStateToProps, { login })(LoginApp);
+export const LoginPage = connect(mapStateToProps, { login })(LoginApp);

@@ -2,74 +2,109 @@ import React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-// Components
-import { Navbar } from "./components/Navbar/Navbar";
-
 // URL Routes for pages
 import { Routes } from "./utils/Routes";
 
 // layout
 import { Layout } from "./hocs/Layout";
+
+// Component
 import { Header } from "./components/Navbar/Navbar";
+import { Loader } from "./components/Loader/Loader";
 // Pages
 import { Activation } from "./pages/Activation/Activation";
 import { Homepage } from "./pages/Homepage/Homepage";
-import { Login } from "./pages/Loginpage/Loginpage";
+import { LoginPage } from "./pages/Loginpage/Loginpage";
 import { Resetpassword } from "./pages/Resetpassword/Resetpassword";
 import { ResetPasswordConfrim } from "./pages/Resetpasswordconfrim/ResetPasswordConfrim";
 import { Signup } from "./pages/Signup/Signup";
-import { Component } from "react";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
 
 export const App = () => {
-  const LayoutRoute = ({ component: Component, ...rest }) => {
+  const RouteWithSidebar = ({ component: Component, ...rest }) => {
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() => {
+      const timer = setTimeout(() => setLoaded(true), 4000);
+      return () => clearTimeout(timer);
+    }, []);
     return (
       <Route
         {...rest}
         render={(props) => (
-          <Layout>
-            <Header />
-            <Component {...props} />
-          </Layout>
+          <>
+            <Layout>
+              {!loaded ? (
+                <Loader />
+              ) : (
+                <>
+                  <Header />
+                  <Component {...props} />
+                </>
+              )}
+            </Layout>
+          </>
         )}
       />
     );
   };
 
-  const LayoutWithoutNav = ({component: Component, ...rest})=>{
+  const RouteFullPage = ({ component: Component, ...rest }) => {
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() => {
+      const timer = setTimeout(() => setLoaded(true), 4000);
+      return () => clearTimeout(timer);
+    }, []);
+    console.log(loaded);
     return (
       <Route
         {...rest}
         render={(props) => (
-          <Layout>
-            <Component {...props} />
-          </Layout>
+          <>
+            <Layout>
+              {!loaded ? (
+                <Loader />
+              ) : (
+                <>
+                  <Component {...props} />
+                </>
+              )}
+            </Layout>
+          </>
         )}
       />
     );
-  }
+  };
 
   return (
     <>
       <Switch>
-        {/* <LayoutRoute component={Navbar} path={Routes.Home.path} exact /> */}
-        <LayoutRoute component={Homepage} path={Routes.Dashboard.path} exact />
-        <LayoutRoute component={Login} path={Routes.Loginpage.path} exact />
-        <LayoutRoute component={Signup} path={Routes.signup.path} exact />
-        <LayoutWithoutNav
+        <RouteWithSidebar
+          component={Homepage}
+          path={Routes.Dashboard.path}
+          exact
+        />
+        <RouteFullPage
+          component={LoginPage}
+          path={Routes.Loginpage.path}
+          exact
+        />
+        <RouteFullPage component={Signup} path={Routes.signup.path} exact />
+        <RouteFullPage
           component={Activation}
           path={Routes.activation.path}
           exact
         />
-        <LayoutRoute
+        <RouteFullPage
           component={Resetpassword}
           path={Routes.resetpassword.path}
           exact
         />
-        <LayoutRoute
+        <RouteFullPage
           component={ResetPasswordConfrim}
           path={Routes.resetpasswordconfrim.path}
           exact
         />
+        <RouteWithSidebar component={Dashboard} path={Routes.Home.path} exact />
       </Switch>
     </>
   );

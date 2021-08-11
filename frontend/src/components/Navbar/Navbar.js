@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { logout } from "../../store/actions/auth";
 
-export const HeaderApp = ({ logout, isAuthenticated }) => {
-  const [redirect, setRedirect] = useState(false);
+export const HeaderApp = ({ logout, isAuthenticated, user }) => {
+  const admin = user !== null ? user.is_superuser : false;
+  // console.log(admin);
 
   const logout_user = () => {
     logout();
@@ -17,6 +18,11 @@ export const HeaderApp = ({ logout, isAuthenticated }) => {
   const AuthLinks = () => {
     return (
       <>
+        {admin ? (
+          <Nav.Link as={Link} to="/dashboard">
+            Dashboard
+          </Nav.Link>
+        ) : null}
         <Nav.Link onClick={logout_user}>Logout</Nav.Link>
       </>
     );
@@ -61,6 +67,7 @@ export const HeaderApp = ({ logout, isAuthenticated }) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user,
 });
 
 export const Header = connect(mapStateToProps, { logout })(HeaderApp);

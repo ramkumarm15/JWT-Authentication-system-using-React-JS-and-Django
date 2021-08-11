@@ -9,6 +9,11 @@ import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 
 const HomepageApp = ({ isAuthenticated }) => {
+
+  // const capFirstLetter = (text) =>{
+  //   return text.
+  // }
+
   return (
     <>
       {isAuthenticated ? (
@@ -17,17 +22,14 @@ const HomepageApp = ({ isAuthenticated }) => {
             <Col xl={12}>
               <div className="mt-5 p-5 bg-light">
                 <div className="text-center">
-                  <h1>Session Authentication App</h1>
+                  <h1>JWT Authentication App</h1>
                   <p className="text-muted">
-                    The Application uses a Django rest framework session
+                    The Application uses a Django rest framework JWT
                     authentication to login and logout users. Here I use React
-                    as Frontend.
+                    as Frontend and djnago as Backend.
                   </p>
                 </div>
-                <hr className="my-4" />
-                <Link className="btn btn-secondary me-3" to="/login">
-                  Login
-                </Link>
+                <hr className="my-4 text-dark" />
               </div>
             </Col>
           </Row>

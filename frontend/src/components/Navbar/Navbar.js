@@ -14,6 +14,10 @@ export const HeaderApp = ({ logout, isAuthenticated, user }) => {
     logout();
   };
 
+  const firstLetterCaps = (text) => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
+
   const AuthLinks = () => {
     return (
       <>
@@ -23,6 +27,9 @@ export const HeaderApp = ({ logout, isAuthenticated, user }) => {
           </Nav.Link>
         ) : null}
         <Nav.Link onClick={logout_user}>Logout</Nav.Link>
+        <Nav.Link as="p" className="m-0">
+          {firstLetterCaps(user.name)}
+        </Nav.Link>
       </>
     );
   };
@@ -69,7 +76,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
 });
-
 
 // Connect react component with redux store
 export const Header = connect(mapStateToProps, { logout })(HeaderApp);

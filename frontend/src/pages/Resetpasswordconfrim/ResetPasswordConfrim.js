@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+
+// Router
 import { Redirect } from "react-router-dom";
+
+// redux connect with react
 import { connect } from "react-redux";
 
 // Bootstrap
@@ -108,6 +112,7 @@ const ResetPasswordConfrimApp = ({ match, reset_password_confirm }) => {
   );
 };
 
+// Connect react component with redux store
 export const ResetPasswordConfrim = connect(null, { reset_password_confirm })(
   ResetPasswordConfrimApp
 );

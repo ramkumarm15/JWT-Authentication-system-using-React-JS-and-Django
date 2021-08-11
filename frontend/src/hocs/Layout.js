@@ -4,10 +4,8 @@ import { connect } from "react-redux";
 import { checkAuthentication, loadUser } from "../store/actions/auth";
 
 import { ToastContainer, Slide } from "react-toastify";
-// import ReactLoading from "react-loading";
 
-
-
+// higher order react component
 const LayoutApp = ({ checkAuthentication, loadUser, children }) => {
   useEffect(() => {
     checkAuthentication();
@@ -22,6 +20,7 @@ const LayoutApp = ({ checkAuthentication, loadUser, children }) => {
   );
 };
 
+// Connect react component with redux store
 export const Layout = connect(null, { checkAuthentication, loadUser })(
   LayoutApp
 );

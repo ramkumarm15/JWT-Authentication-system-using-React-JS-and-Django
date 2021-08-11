@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+
+// Router
+import { Redirect, Link } from "react-router-dom";
+
+// redux connect with react
 import { connect } from "react-redux";
 
 // Bootstrap
@@ -120,9 +124,11 @@ const LoginApp = ({ login, isAuthenticated }) => {
   );
 };
 
+// Get Data from redux store
 const mapStateToProps = (state) => ({
   // Check Authentictaion
   isAuthenticated: state.auth.isAuthenticated,
 });
 
+// Connect react component with redux store
 export const LoginPage = connect(mapStateToProps, { login })(LoginApp);

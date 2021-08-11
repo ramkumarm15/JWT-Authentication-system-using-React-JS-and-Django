@@ -1,14 +1,17 @@
-import React from "react";
+import React,{ useState } from "react";
+
+// Loading Screen utils
 import Lottie from "react-lottie";
-import loading from "../../styles/lottie/loading.json";
-import tick from "../../styles/lottie/tick.json";
-import { Col, Container, Row } from "react-bootstrap";
-import { useState } from "react";
 import FadeIn from "react-fade-in";
 
+// Lottie Images
+import loading from "../../styles/lottie/loading.json";
+import tick from "../../styles/lottie/tick.json";
+
+// Loading screen
 export const Loader = ({ show }) => {
   const [done, setDone] = useState(false);
-  console.log(show);
+  
   React.useEffect(() => {
     let timeout = setTimeout(() => setDone(true), 2000);
     return () => {

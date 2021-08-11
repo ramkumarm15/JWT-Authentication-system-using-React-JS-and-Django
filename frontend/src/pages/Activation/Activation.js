@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+
+// Router redirection
 import { Redirect } from "react-router-dom";
+
+// redux connect with react
 import { connect } from "react-redux";
 
 // Bootstrap
@@ -78,4 +82,5 @@ const ActivationApp = ({ match, activate }) => {
   );
 };
 
+// Connect react component with redux store
 export const Activation = connect(null, { activate })(ActivationApp);

@@ -1,12 +1,14 @@
 import React from "react";
+
+// Router redirection
 import { Link, Redirect } from "react-router-dom";
+
+// redux connect with react
+import { connect } from "react-redux";
 
 import { Container, Row, Col } from "react-bootstrap";
 
-import { connect } from "react-redux";
-
 const HomepageApp = ({ isAuthenticated }) => {
-
   return (
     <>
       {isAuthenticated ? (
@@ -37,7 +39,10 @@ const HomepageApp = ({ isAuthenticated }) => {
   );
 };
 
+// Get Data from redux store
 const mapToStateProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
+
+// Connect react component with redux store
 export const Homepage = connect(mapToStateProps)(HomepageApp);

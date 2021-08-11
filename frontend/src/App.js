@@ -11,14 +11,16 @@ import { Layout } from "./hocs/Layout";
 // Component
 import { Header } from "./components/Navbar/Navbar";
 import { Loader } from "./components/Loader/Loader";
+
 // Pages
 import { Activation } from "./pages/Activation/Activation";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { Homepage } from "./pages/Homepage/Homepage";
 import { LoginPage } from "./pages/Loginpage/Loginpage";
 import { Resetpassword } from "./pages/Resetpassword/Resetpassword";
 import { ResetPasswordConfrim } from "./pages/Resetpasswordconfrim/ResetPasswordConfrim";
 import { Signup } from "./pages/Signup/Signup";
-import { Dashboard } from "./pages/Dashboard/Dashboard";
+
 
 export const App = () => {
   const RouteWithSidebar = ({ component: Component, ...rest }) => {

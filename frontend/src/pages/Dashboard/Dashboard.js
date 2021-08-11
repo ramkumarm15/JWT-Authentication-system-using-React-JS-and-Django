@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+
+// Router redirection
 import { Redirect } from "react-router-dom";
+
+// redux connect with react
+import { connect } from "react-redux";
+
 
 const DashboardApp = ({ user, isAuthenticated }) => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -25,9 +30,11 @@ const DashboardApp = ({ user, isAuthenticated }) => {
   );
 };
 
+// Get Data from redux store
 const mapToStateProps = (state) => ({
   user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
 });
 
+// Connect react component with redux store
 export const Dashboard = connect(mapToStateProps)(DashboardApp);

@@ -9,7 +9,6 @@ import { logout } from "../../store/actions/auth";
 
 export const HeaderApp = ({ logout, isAuthenticated, user }) => {
   const admin = user !== null ? user.is_superuser : false;
-  // console.log(admin);
 
   const logout_user = () => {
     logout();
@@ -65,9 +64,12 @@ export const HeaderApp = ({ logout, isAuthenticated, user }) => {
   );
 };
 
+// Get data from redux store
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
 });
 
+
+// Connect react component with redux store
 export const Header = connect(mapStateToProps, { logout })(HeaderApp);

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+// redux connect with react
 import { connect } from "react-redux";
 
 // Bootstrap
@@ -70,6 +72,8 @@ const ResetPasswordApp = ({ reset_password }) => {
   );
 };
 
+
+// Connect react component with redux store
 export const Resetpassword = connect(null, { reset_password })(
   ResetPasswordApp
 );

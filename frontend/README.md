@@ -12,12 +12,12 @@ Usually, react js and Django runs in a separate localhost port, Here I integrate
 
 I have covered almost 70% of authentication works in frontend which implemented in Django. 
 For Eg. 
--[X] Login
--[x] Signup 
--[x] Account Activation
--[x] Password reset link
--[x] Password rest confirm 
--[x] Check Authentication
--[x] JWT access token verify when user logged-in after some time
--[x] Display errors when register an user account like not an unique email, check for strong password
--[x] Access to page for specific user like Admin user
+- [X] Login
+- [x] Signup 
+- [x] Account Activation
+- [x] Password reset link
+- [x] Password rest confirm 
+- [x] Check Authentication
+- [x] JWT access token verify when user logged-in after some time
+- [x] Display errors when register an user account like not an unique email, check for strong password
+- [x] Access to page for specific user like Admin user

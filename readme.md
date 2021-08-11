@@ -1,9 +1,8 @@
-# JWT Authentication system using React JS and Django
 # Authentication system using REST API
 
 ## Frontend Works
 
-The frontend is completely implemented by using [React JS](https://reactjs.org/). UI design is done with the use of my own redefined Bootstrap framework(v.5.0.2) and [react-bootstrap](https://react-bootstrap.github.io/). Here I provide the link of my [Bootstarp](https://github.com/ramkumarm15/updated-css-library).
+The frontend is completely implemented by using [React JS](https://reactjs.org/). UI design is done with the use of my own redefined Bootstrap framework(v.5.0.2) and [react-bootstrap](https://react-bootstrap.github.io/). Here I provide the link of my [Bootstarp](https://github.com/ramkumarm15/bootstarp-modified).
 
 The state management is done by [redux](https://redux.js.org/), [react-redux](https://react-redux.js.org/). React let us build a UI as a function of a state and redux manages the state of data fetched from the [Django](https://www.djangoproject.com/) server(backend) using API request and updates the state when changes occur or the action happened.
 
@@ -13,12 +12,12 @@ Usually, react js and Django runs in a separate localhost port, Here I integrate
 
 I have covered almost 70% of authentication works in frontend which implemented in Django. 
 For Eg. 
-[X] Login
-[x] Signup 
-[x] Account Activation
-[x] Password reset link
-[x] Password rest confirm 
-[x] Check Authentication
-[x] JWT access token verify when user logged-in after some time
-[x] Display errors when register an user account like not an unique email, check for strong password
-[x] Access to page for specific user like Admin user
+- [X] Login
+- [x] Signup 
+- [x] Account Activation
+- [x] Password reset link
+- [x] Password rest confirm 
+- [x] Check Authentication
+- [x] JWT access token verify when user logged-in after some time
+- [x] Display errors when register an user account like not an unique email, check for strong password
+- [x] Access to page for specific user like Admin user

@@ -70,7 +70,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'auth_jwt',
         'USER': 'postgres',
-        'PASSWORD': 'ramkumar@45',
+        'PASSWORD': '<--dbpassword-->',
         'HOST': 'localhost',
         'PORT': 5432
     }
@@ -97,8 +97,8 @@ AUTH_PASSWORD_VALIDATORS = [
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'backend.mail.testing@gmail.com'
-EMAIL_HOST_PASSWORD = 'spfsszlkxyknwoex'
+EMAIL_HOST_USER = '<--Email Address-->'
+EMAIL_HOST_PASSWORD = '<--Password-->'
 EMAIL_USE_TLS = True
 
 # Internationalization
